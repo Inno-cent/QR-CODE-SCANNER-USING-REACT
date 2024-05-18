@@ -1,15 +1,45 @@
-import React from 'react';
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { useState } from "react";
+import "./App.css";
+
+const initialState = {
+  name: "",
+  surname: "",
+  email: "",
+  dob: "",
+  phone: "",
+  timestamp: "",
+};
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+
+  const [inputs, setInputs] = useState({
+    ...initialState,
+  });
+  const formItems = [
+    { type: "text", name: "name", text: "Name" },
+    { type: "text", name: "surname", text: "Surname" },
+    { type: "text", name: "email", text: "Email" },
+    { type: "tel", name: "phone", text: "Phone Number" },
+    { type: "date", name: "dob", text: "Date of Birth" },
+  ];
+
+  const handleSubmit = (e) => {
+    e?.preventDefault();
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    event.persist();
+    setInputs((inputs) => ({
+      ...inputs,
+      [name]: value,
+    }));
+  };
 
   return (
     <>
-
       <div className="todo-app">
         {/* <div>
           <h1>Add An Item...</h1>
@@ -30,26 +60,28 @@ function App() {
         
         </div> */}
 
-<form onSubmit={handleSubmit} className="qr-form">
+        <form onSubmit={handleSubmit} className="qr-form">
           {formItems.map((item, index) => (
-            <label className="form-label" key={index}>
-              {item.text}:
-              <input
-                className="form-input"
-                type={item.type}
-                name={item.name}
-                aria-label={item.name}
-                value={inputs[item.name]}
-                onChange={handleInputChange}
-                required
-              />
-            </label>
+            <div className="todo-app-inner">
+              <label className="form-label" key={index}>
+                {item.text}:
+                <input
+                  className="todo-input"
+                  type={item.type}
+                  name={item.name}
+                  aria-label={item.name}
+                  value={inputs[item.name]}
+                  onChange={handleInputChange}
+                  required
+                />
+              </label>
+            </div> 
           ))}
           <input type="submit" aria-label="submit" value="Get QR" />
         </form>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
