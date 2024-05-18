@@ -40,13 +40,12 @@ function App() {
 
   return (
     <>
-    <div className="app">
-
-      <div className="todo-app">
-        {/* <div>
+      <div className="app">
+        <div className="todo-app">
+          {/* <div>
           <h1>Add An Item...</h1>
         </div> */}
-        {/* <div className="todo-app-inner">
+          {/* <div className="todo-app-inner">
           <input
             type="text"
             className="todo-input"
@@ -62,28 +61,35 @@ function App() {
         
         </div> */}
 
-        <form onSubmit={handleSubmit} className="qr-code-form">
-          {formItems.map((item, index) => (
-            <div className="todo-app-inner">
-              <label className="form-label" key={index}>
-                {item.text}:
-                <input
-                  className="todo-input"
-                  type={item.type}
-                  name={item.name}
-                  aria-label={item.name}
-                  value={inputs[item.name]}
-                  onChange={handleInputChange}
-                  key={index}
-                  required
-                />
-              </label>
-            </div> 
-          ))}
-          <input className="todo-button" type="submit" aria-label="submit" value="Get QR" />
-        </form>
+          <form onSubmit={handleSubmit} className="qr-code-form">
+            {formItems.map((item, index) => (
+              <div className="todo-app-inner">
+                <label className="form-label" key={index}>
+                  {item.text}:
+                </label>
+                <div>
+                  <input
+                    className="todo-input"
+                    type={item.type}
+                    name={item.name}
+                    aria-label={item.name}
+                    value={inputs[item.name]}
+                    onChange={handleInputChange}
+                    key={index}
+                    required
+                  />
+                </div>
+              </div>
+            ))}
+            <input
+              className="todo-button"
+              type="submit"
+              aria-label="submit"
+              value="Get QR"
+            />
+          </form>
+        </div>
       </div>
-    </div>
     </>
   );
 }
