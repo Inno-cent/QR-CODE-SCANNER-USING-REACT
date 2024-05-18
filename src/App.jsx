@@ -40,6 +40,8 @@ function App() {
 
   return (
     <>
+    <div className="app">
+
       <div className="todo-app">
         {/* <div>
           <h1>Add An Item...</h1>
@@ -60,7 +62,7 @@ function App() {
         
         </div> */}
 
-        <form onSubmit={handleSubmit} className="qr-form">
+        <form onSubmit={handleSubmit} className="qr-code-form">
           {formItems.map((item, index) => (
             <div className="todo-app-inner">
               <label className="form-label" key={index}>
@@ -72,14 +74,16 @@ function App() {
                   aria-label={item.name}
                   value={inputs[item.name]}
                   onChange={handleInputChange}
+                  key={index}
                   required
                 />
               </label>
             </div> 
           ))}
-          <input type="submit" aria-label="submit" value="Get QR" />
+          <input className="todo-button" type="submit" aria-label="submit" value="Get QR" />
         </form>
       </div>
+    </div>
     </>
   );
 }

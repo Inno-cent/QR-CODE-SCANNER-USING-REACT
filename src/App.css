@@ -1,4 +1,4 @@
-/* .App {
+.app {
   background: #2148c0;
   min-height: 100vh;
   position: relative;
@@ -8,7 +8,8 @@
     rgba(48, 16, 255, 1) 0%,
     rgba(100, 115, 255, 1) 100%
   );
-} */
+  /* display: block; */
+}
 
 .todo-app {
   /* max-width: 18rem; */
@@ -32,6 +33,27 @@
 
 .todo-app-inner {
   width: 25rem;
+}
+
+.qr-code-form{
+  padding: 20px;
+}
+
+.todo-button {
+  padding: 16px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  outline: none;
+  background: linear-gradient(
+    90deg,
+    rgba(93, 12, 255, 1) 0%,
+    rgba(155, 0, 250, 1) 100%
+  );
+  color: #fff;
+  text-transform: capitalize;
+  margin: 10px 0;
+  width: 100%;
 }
 
 h1 {
