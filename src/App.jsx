@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
 import "./App.css";
 
 const initialState = {
@@ -12,7 +13,7 @@ const initialState = {
 };
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
   const [inputs, setInputs] = useState({
     ...initialState,
@@ -29,8 +30,23 @@ function App() {
 
   const [error, updateError] = useState("");
 
+  const [mask, updateMask] = useState(0);
+
   const handleSubmit = (e) => {
     e?.preventDefault();
+    const payload = { data: { ...inputs, timestamp: +new Date() }, mask };
+    const API =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000"
+        : "https://qr-code-genetator-nextjs.vercel.app";
+    axios
+      .post(API + "/api/scan", payload)
+      .then((response) => {
+        updateQrCode(response.data);
+      })
+      .catch((err) => {
+        updateError(err.data);
+      });
   };
 
   const handleInputChange = (event) => {
@@ -48,18 +64,16 @@ function App() {
     handleSubmit();
   };
 
-
   const resetCode = (e) => {
     e?.preventDefault();
     updateMask(0);
-    updateCode("");
-    updateErr("");
+    updateQrCode("");
+    updateError("");
     setInputs((inputs) => ({
       ...inputs,
       ...initialState,
     }));
   };
-
 
   return (
     <>
@@ -113,15 +127,19 @@ function App() {
           </form>
 
           {qrcode && (
-          <div>
-            <button onClick={newPattern} className="form-newpattern">
-              New pattern
-            </button>
-            <button onClick={resetCode} className="form-newpattern">
-              Reset
-            </button>
-          </div>
-        )}
+            <div>
+              <button onClick={newCode} className="form-newpattern">
+                New pattern
+              </button>
+              <button onClick={resetCode} className="form-newpattern">
+                Reset
+              </button>
+            </div>
+          )}
+
+          {error && <p>{error}</p>}
+
+          <img src={qrCode} alt="" aria-label="code" />
         </div>
       </div>
     </>

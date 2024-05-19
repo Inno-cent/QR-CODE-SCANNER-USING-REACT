@@ -1,4 +1,5 @@
 const qr = require("qrcode");
+// import qr form "qrcode"
 
 export default function handler(req, res) {
   if(!req.body || !req.body.data){
