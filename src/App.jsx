@@ -25,6 +25,10 @@ function App() {
     { type: "date", name: "dob", text: "Date of Birth" },
   ];
 
+  const [qrcode, updateQrCode] = useState("");
+
+  const [error, updateError] = useState("");
+
   const handleSubmit = (e) => {
     e?.preventDefault();
   };
@@ -37,6 +41,25 @@ function App() {
       [name]: value,
     }));
   };
+
+  const newCode = (e) => {
+    e?.preventDefault();
+    updateMask((mask + 1) % 8);
+    handleSubmit();
+  };
+
+
+  const resetCode = (e) => {
+    e?.preventDefault();
+    updateMask(0);
+    updateCode("");
+    updateErr("");
+    setInputs((inputs) => ({
+      ...inputs,
+      ...initialState,
+    }));
+  };
+
 
   return (
     <>
@@ -88,6 +111,17 @@ function App() {
               value="Get QR"
             />
           </form>
+
+          {qrcode && (
+          <div>
+            <button onClick={newPattern} className="form-newpattern">
+              New pattern
+            </button>
+            <button onClick={resetCode} className="form-newpattern">
+              Reset
+            </button>
+          </div>
+        )}
         </div>
       </div>
     </>
