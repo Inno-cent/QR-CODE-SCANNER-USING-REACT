@@ -35,18 +35,18 @@ function App() {
   const handleSubmit = (e) => {
     e?.preventDefault();
     const payload = { data: { ...inputs, timestamp: +new Date() }, mask };
-    const API =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000"
-        : "https://qr-code-genetator-nextjs.vercel.app";
-    axios
-      .post(API + "/api/scan", payload)
-      .then((response) => {
-        updateQrCode(response.data);
-      })
-      .catch((err) => {
-        updateError(err.data);
-      });
+    // const API =
+    //   process.env.NODE_ENV === "development"
+    //     ? "http://localhost:3000"
+    //     : "https://qr-code-genetator-nextjs.vercel.app";
+    // axios
+    //   .post(API + "/api/scan", payload)
+    //   .then((response) => {
+    //     updateQrCode(response.data);
+    //   })
+    //   .catch((err) => {
+    //     updateError(err.data);
+    //   });
   };
 
   const handleInputChange = (event) => {
